@@ -1,8 +1,10 @@
 function [C, th1, th2] = configSpacePlot(len1, len2, obs)
     res = 50; % Resolution of the configuration space
     num_points = 10; % Number of points to sample along each link
-    th1 = linspace(0, 2*pi, res); % All possible theta1 values
-    th2 = linspace(0, 2*pi, res); % All possible theta2 values
+    th1 = linspace(0, 2*pi, res+1); % All possible theta1 values
+    th1(end) = [];
+    th2 = linspace(0, 2*pi, res+1); % All possible theta2 values
+    th2(end) = [];
 
     % Initialize configuration space to zeros
     C = zeros(res, res);
