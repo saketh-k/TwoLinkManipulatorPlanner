@@ -54,7 +54,7 @@ computeDistanceOnCircle = @(a,b) min(abs(a-b),2*pi-abs(a-b));
 %computeDistanceOnCircle = @(a,b) min(mod(a-b,2*pi),mod(b-a,2*pi));
 computeDistanceOnTorus = @(a1,a2,b1,b2) sqrt(computeDistanceOnCircle(a1,a2)^2+computeDistanceOnCircle(b1,b2)^2);
 
-parfor i=1:n_samples
+for i=1:n_samples
     Adj_table{i}=[];%Adj_table of node i is initialized empty
     for j=1:n_samples
         if j==i
@@ -86,10 +86,8 @@ goal_point = [5.2, 1];
 goal2_point = [2, 5];
 
 thetas1 = findPath(Samples, n_samples, Adj_table, r, edge_length, fig_start_goal_connected, start_point, goal_point);
-thetas2 = findPath(Samples, n_samples, Adj_table, r, edge_length, fig_start_goal_connected2, goal_point, start_point);
 
-
-animateArm(len1, len2, [thetas1', thetas2']', obs);
+animateArm(len1, len2, [thetas1], obs);
 
 
 
