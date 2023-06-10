@@ -1,4 +1,4 @@
-function animateArm(len1, len2, thetas, obs)
+function animateArm(len1, len2, thetas, obs, labellocs)
     figure;
 
     % Get the number of frames from the length of theta_mat
@@ -11,7 +11,7 @@ function animateArm(len1, len2, thetas, obs)
             clf;
             
             % Draw the arm at the current theta values
-            drawArmAndObstacles(len1, len2, thetas(k, 1), thetas(k, 2), obs);
+            drawArmAndObstacles(len1, len2, thetas(k, 1), thetas(k, 2), obs, labellocs);
             pause(0.05);
         end
     end

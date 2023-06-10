@@ -1,4 +1,4 @@
-function drawArmAndObstacles(len1, len2, theta1, theta2, obs)
+function drawArmAndObstacles(len1, len2, theta1, theta2, obs, labelloc)
 
     % Calculate position of joint and end effector
     joint = [len1*cos(theta1) len1*sin(theta1)];
@@ -13,6 +13,9 @@ function drawArmAndObstacles(len1, len2, theta1, theta2, obs)
     plot(0, 0, 'bo', 'MarkerSize', 10, 'MarkerFaceColor', 'b');  % Base
     plot(joint(1), joint(2), 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'r');  % Joint
     plot(end_effector(1), end_effector(2), 'go', 'MarkerSize', 10, 'MarkerFaceColor', 'g');  % End effector
+
+    %draw labels
+    scatter(labelloc(:,1),labelloc(:,2),'x');
 
     % Draw obstacles
     for i = 1:size(obs, 1)

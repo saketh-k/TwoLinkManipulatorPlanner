@@ -1,7 +1,12 @@
 %clc;clear;
 
-% clear all
+clear all
 
+label_location=[1.25 sqrt(3)/4;
+                0.8    0.75
+                0.6    0.6
+                -sqrt(2)/4  -1-sqrt(2)/4
+                -0.5 -0.5]
 
 
 
@@ -10,7 +15,7 @@ obs = [0.5 0.25 0.25 0.25;
        0 -1.40 0.25 0.35];
 len1 = 1;
 len2 = 0.5;
-drawArmAndObstacles(len1, len2, 0, pi/6, obs);
+drawArmAndObstacles(len1, len2, 0, pi/6, obs, label_location);
 [C, th1, th2] = configSpacePlot(1, 0.5, obs);
 
 [grid1, grid2] = ndgrid(th1, th2);
@@ -38,6 +43,7 @@ axis square
 fig_PRM=figure();
 fig_samplesChil = fig_samples.Children; 
 copyobj(fig_samplesChil, fig_PRM);
+
 
 
 % [adjacency, weights] = generateGraph(C, th1, th2);
@@ -72,24 +78,26 @@ parfor i=1:n_samples
 end
 clear temp n_samples_minus_i j
 
-fig_start_goal_connected=figure();
-fig_PRMChil = fig_PRM.Children; 
-copyobj(fig_PRMChil, fig_start_goal_connected);
-
-fig_start_goal_connected2=figure();
-fig_PRMChil2 = fig_PRM.Children; 
-copyobj(fig_PRMChil2, fig_start_goal_connected);
-
+% fig_start_goal_connected=figure();
+% fig_PRMChil = fig_PRM.Children; 
+% copyobj(fig_PRMChil, fig_start_goal_connected);
+% 
+% fig_start_goal_connected2=figure();
+% fig_PRMChil2 = fig_PRM.Children; 
+% copyobj(fig_PRMChil2, fig_start_goal_connected);
 
 start_point = [0.1, 0.125];
 goal_point = [5.2, 1];
 goal2_point = [2, 5];
 
-thetas1 = findPath(Samples, n_samples, Adj_table, r, edge_length, fig_start_goal_connected, start_point, goal_point);
-thetas2 = findPath(Samples, n_samples, Adj_table, r, edge_length, fig_start_goal_connected2, goal_point, start_point);
+thetas1 = findPath(Samples, n_samples, Adj_table, r, edge_length, start_point, goal_point);
+all_thetas = thetas1;
+
+thetas2 = findPath(Samples, n_samples, Adj_table, r, edge_length, goal_point, start_point);
 
 
-animateArm(len1, len2, [thetas1', thetas2']', obs);
+
+animateArm(len1, len2, [thetas1', thetas2']', obs, label_location);
 
 
 
