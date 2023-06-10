@@ -1,4 +1,6 @@
 function thetas = findPath(Samples, n_samples, Adj_table, r, edge_length, start_point, goal_point)
+goal_point = mod(goal_point, 2*pi)
+start_point = mod(start_point, 2*pi)
 
 plot(start_point(1,1),start_point(1,2),'m>')
 plot(goal_point(1,1),goal_point(1,2),'gs')
